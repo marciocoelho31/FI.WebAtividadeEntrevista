@@ -1,0 +1,98 @@
+﻿@model WebAtividadeEntrevista.Models.ClienteModel
+
+<!-- Modal -->
+<div class="modal fade" id="modal_beneficiarios" tabindex="-1" role="dialog" aria-labelledby="modal_beneficiariosLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal_beneficiariosLabel">Beneficiários</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-5" style="height: 25px;">
+                        <div class="form-group">
+                            <label for="CPF_Beneficiario">CPF:</label>
+                        </div>
+                    </div>
+                    <div class="col-md-5" style="height: 25px;">
+                        <div class="form-group">
+                            <label for="Nome_Beneficiario">Nome:</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2" style="height: 25px;">
+                        <div class="form-group">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <input required="required" type="text" class="form-control" id="CPF_Beneficiario" name="CPF_Beneficiario" placeholder="Ex.: 010.011.111-00" maxlength="14">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <input required="required" type="text" class="form-control" id="Nome_Beneficiario" name="Nome_Beneficiario" placeholder="Ex.: João da Silva" maxlength="100">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <button type="button" id="btnIncluirBenef" class="btn btn-success">Incluir</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="divBeneficiarios">
+                    <div class="row" style="padding-top: 6px; margin-left:3px; margin-right: 3px;border-bottom: solid 2px #d4d4d4;">
+                        <div class="col-md-4" style="height: 25px; font-weight: bold;">
+                            <div class="form-group">
+                                CPF
+                            </div>
+                        </div>
+                        <div class="col-md-4" style="height: 25px; font-weight: bold;">
+                            <div class="form-group">
+                                Nome
+                            </div>
+                        </div>
+                        <div class="col-md-2" style="height: 25px;">
+                            <div class="form-group">
+                                &nbsp;
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (Model.Beneficiarios != null)
+                    {
+                        foreach (var item in Model.Beneficiarios)
+                        {
+                            <div id="id_@item.CPF.Replace(".","").Replace("-","")" class="row" style="background-color: #f1f1f1; padding-top: 6px; margin-left:3px; margin-right: 3px;">
+                                <div class="col-md-4" style="height: 35px;">
+                                    <div class="form-group">
+                                        @item.CPF
+                                    </div>
+                                </div>
+                                <div class="col-md-4" style="height: 35px;">
+                                    <div class="form-group">
+                                        @item.Nome
+                                    </div>
+                                </div>
+                                <div class="col-md-4" style="height: 35px;">
+                                    <div class="form-group">
+                                        <button type="button" id="btnAlterarBenef" class="btn btn-sm btn-primary" onclick="CarregaAlterarBeneficiario(this);" >Alterar</button>&nbsp;&nbsp;<button type="button" id="btnExcluirBenef" class="btn btn-sm btn-primary" onclick="RemoveBeneficiario(this);" >Excluir</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
